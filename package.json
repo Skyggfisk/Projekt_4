@@ -1,0 +1,19 @@
+{
+  "name": "projekt_4",
+  "version": "0.0.1",
+  "description": "API and backend for a small service that lets people see and create small tasks/favours.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skyggfisk/Projekt_4.git"
+  },
+  "author": "gruppe1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Skyggfisk/Projekt_4/issues"
+  },
+  "homepage": "https://github.com/Skyggfisk/Projekt_4#readme"
+}
