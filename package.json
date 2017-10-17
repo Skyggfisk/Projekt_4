@@ -9,8 +9,10 @@
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
-    "pug": "^2.0.0-beta11",
+    "helmet": "^3.9.0",
+    "mongoose": "^4.12.3",
     "morgan": "^1.8.1",
+    "pug": "^2.0.0-beta11",
     "serve-favicon": "^2.4.1"
   },
   "devDependencies": {
