@@ -1,24 +1,25 @@
 {
-  "name": "projekt_4",
-  "version": "0.0.1",
-  "description": "API and backend for a small service that lets people see and create small tasks/favours.",
-  "main": "app.js",
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app/bin/www.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Skyggfisk/Projekt_4.git"
-  },
-  "author": "gruppe1",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Skyggfisk/Projekt_4/issues"
-  },
-  "homepage": "https://github.com/Skyggfisk/Projekt_4#readme",
   "dependencies": {
-    "express": "^4.16.2",
-    "express-generator": "^4.15.5",
-    "typescript": "^2.5.3"
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "pug": "^2.0.0-beta11",
+    "morgan": "^1.8.1",
+    "serve-favicon": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "1.16.1",
+    "@types/cookie-parser": "^1.3.30",
+    "@types/ejs": "^2.3.33",
+    "@types/express": "^4.0.35",
+    "@types/morgan": "^1.7.32",
+    "@types/node": "^7.0.10",
+    "@types/serve-favicon": "^2.2.28"
   }
 }
