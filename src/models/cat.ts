@@ -28,3 +28,5 @@ CatSchema.methods.myNameIs = function(): string {
 
 export const Cat: Model<ICatModel> = model<ICatModel>("Cat", CatSchema);
 export default Cat;
+
+//dukjaæowiuuidhawæioh
