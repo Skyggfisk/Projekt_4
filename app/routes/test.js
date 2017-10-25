@@ -14,11 +14,11 @@ router.post("/add", (req, res, next) => {
         age: req.body.age,
         color: req.body.color
     });
-    console.log(cat.myNameIs());
     cat.save(function (err, cat) {
         if (err)
             return console.log(err);
-        console.log(cat.myNameIs());
+        console.log(cat.name + " saved!");
+        res.send("it worked");
     });
 });
 exports.default = router;

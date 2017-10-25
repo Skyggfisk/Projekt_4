@@ -18,11 +18,9 @@ router.post("/add", (req, res, next) => {
     age: req.body.age,
     color: req.body.color
   });
-  console.log(cat.myNameIs());
   cat.save(function(err, cat) {
     if (err) return console.log(err);
-    console.log(cat.myNameIs() + "saved!");
-    // don't work, would like a response...
+    console.log(cat.name + " saved!");
     res.send("it worked");
   });
 });
