@@ -6,12 +6,15 @@ import Cat from "../models/cat";
 export let Schema = mongoose.Schema;
 const router = express.Router();
 
-/* GET test data */
+/* GET test cats */
 router.get("/", (req, res, next) => {
-  res.send("yo");
+  Cat.find(function(err, cats) {
+    if (err) return console.error(err);
+    res.json(cats);
+  });
 });
 
-/* POST cat (use postman) */
+/* POST a cat (use postman) */
 router.post("/add", (req, res, next) => {
   var cat = new Cat({
     name: req.body.name,

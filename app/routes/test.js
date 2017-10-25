@@ -6,7 +6,11 @@ const cat_1 = require("../models/cat");
 exports.Schema = mongoose.Schema;
 const router = express.Router();
 router.get("/", (req, res, next) => {
-    res.send("yo");
+    cat_1.default.find(function (err, cats) {
+        if (err)
+            return console.error(err);
+        res.json(cats);
+    });
 });
 router.post("/add", (req, res, next) => {
     var cat = new cat_1.default({
