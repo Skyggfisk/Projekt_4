@@ -9,6 +9,7 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const index_1 = require("./routes/index");
 const test_1 = require("./routes/test");
+const categories_1 = require("./routes/categories");
 const app = express();
 app.use(helmet());
 mongoose.connect("mongodb://admin:admin@ds121565.mlab.com:21565/projekt4");
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", index_1.default);
 app.use("/test", test_1.default);
+app.use("/categories", categories_1.default);
 app.use((req, res, next) => {
     var err = new Error("Not Found");
     err["status"] = 404;
