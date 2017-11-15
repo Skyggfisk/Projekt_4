@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const mongoose = require("mongoose");
 const cat_1 = require("../models/cat");
+const user_1 = require("../models/user");
 exports.Schema = mongoose.Schema;
 const router = express.Router();
 router.get("/", (req, res, next) => {
@@ -10,6 +11,13 @@ router.get("/", (req, res, next) => {
         if (err)
             return console.error(err);
         res.json(cats);
+    });
+});
+router.get("/user/", (req, res, next) => {
+    user_1.default.find(function (err, users) {
+        if (err)
+            return console.error(err);
+        res.json(users);
     });
 });
 router.post("/add", (req, res, next) => {

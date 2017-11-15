@@ -3,6 +3,7 @@
 import * as express from "express";
 import * as mongoose from "mongoose";
 import Cat from "../models/cat";
+import User from "../models/user";
 export let Schema = mongoose.Schema;
 const router = express.Router();
 
@@ -11,6 +12,13 @@ router.get("/", (req, res, next) => {
   Cat.find(function(err, cats) {
     if (err) return console.error(err);
     res.json(cats);
+  });
+});
+
+router.get("/user/", (req, res, next) => {
+  User.find(function(err, users) {
+    if (err) return console.error(err);
+    res.json(users);
   });
 });
 
