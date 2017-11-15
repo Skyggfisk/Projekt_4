@@ -10,6 +10,7 @@ import * as helmet from "helmet";
 import * as mongoose from "mongoose";
 import index from "./routes/index";
 import test from "./routes/test";
+import categories from "./routes/categories";
 
 const app: express.Express = express();
 
@@ -29,8 +30,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// define routes
 app.use("/", index);
 app.use("/test", test);
+app.use("/categories", categories);
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {
