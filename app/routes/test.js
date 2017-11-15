@@ -20,6 +20,21 @@ router.get("/user/", (req, res, next) => {
         res.json(users);
     });
 });
+router.post("/adduser/", (req, res, next) => {
+    var user = new user_1.default({
+        facebookid: req.body.facebookid,
+        description: req.body.description,
+        services: req.body.services,
+        range: req.body.range,
+        zipcode: req.body.zipcode
+    });
+    user.save(function (err, cat) {
+        if (err)
+            return console.log(err);
+        console.log(cat.name + " saved!");
+        res.send("it worked");
+    });
+});
 router.post("/add", (req, res, next) => {
     var cat = new cat_1.default({
         name: req.body.name,
