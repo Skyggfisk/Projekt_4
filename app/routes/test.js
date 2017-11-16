@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const mongoose = require("mongoose");
+const moment = require("moment");
 const cat_1 = require("../models/cat");
 const user_1 = require("../models/user");
 exports.Schema = mongoose.Schema;
@@ -31,7 +32,10 @@ router.post("/adduser/", (req, res, next) => {
     user.save(function (err, user) {
         if (err)
             return console.log(err);
-        console.log("User: " + req.body.facebookid + " saved!");
+        console.log("User: " +
+            req.body.facebookid +
+            " saved at " +
+            moment().format("MMMM Do YYYY, h:mm:ss a"));
         res.send("it worked");
     });
 });

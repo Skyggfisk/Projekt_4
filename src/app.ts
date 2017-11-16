@@ -9,7 +9,7 @@ import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
 import * as mongoose from "mongoose";
 import index from "./routes/index";
-import test from "./routes/test";
+import user from "./routes/user";
 import categories from "./routes/categories";
 
 const app: express.Express = express();
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // define routes
 app.use("/", index);
-app.use("/test", test);
+app.use("/user", user);
 app.use("/categories", categories);
 
 //catch 404 and forward to error handler

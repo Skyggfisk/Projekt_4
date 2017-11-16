@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
 const index_1 = require("./routes/index");
-const test_1 = require("./routes/test");
+const user_1 = require("./routes/user");
 const categories_1 = require("./routes/categories");
 const app = express();
 app.use(helmet());
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", index_1.default);
-app.use("/test", test_1.default);
+app.use("/user", user_1.default);
 app.use("/categories", categories_1.default);
 app.use((req, res, next) => {
     var err = new Error("Not Found");
