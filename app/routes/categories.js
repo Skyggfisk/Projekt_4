@@ -6,10 +6,10 @@ const category_1 = require("../models/category");
 exports.Schema = mongoose.Schema;
 const router = express.Router();
 router.get("/", (req, res, next) => {
-    category_1.default.find(function (err, cats) {
+    category_1.default.find(function (err, categories) {
         if (err)
             return console.error(err);
-        res.json(cats);
+        res.json(categories);
     });
 });
 exports.default = router;

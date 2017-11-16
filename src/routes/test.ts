@@ -30,9 +30,9 @@ router.post("/adduser/", (req, res, next) => {
     range: req.body.range,
     zipcode: req.body.zipcode
   });
-  user.save(function(err, cat) {
+  user.save(function(err, user) {
     if (err) return console.log(err);
-    console.log(cat.name + " saved!");
+    console.log("User: " + req.body.facebookid + " saved!");
     res.send("it worked");
   });
 });
