@@ -19,7 +19,10 @@ router.post("/", (req, res, next) => {
         description: req.body.description,
         services: req.body.services,
         range: req.body.range,
-        zipcode: req.body.zipcode
+        zipcode: req.body.zipcode,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        imgurl: req.body.imgurl
     });
     user.save(function (err, user) {
         if (err)

@@ -6,4 +6,7 @@ export interface IUser {
   services: Array<ICategorynprice>;
   range: number;
   zipcode: string;
+  fname: string;
+  lname: string;
+  imgurl: string;
 }

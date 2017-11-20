@@ -8,7 +8,10 @@ export var UserSchema: Schema = new Schema({
   description: String,
   services: Array,
   range: Number,
-  zipcode: String
+  zipcode: String,
+  fname: String,
+  lname: String,
+  imgurl: String
 });
 
 export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);

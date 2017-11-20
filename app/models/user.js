@@ -6,7 +6,10 @@ exports.UserSchema = new mongoose_1.Schema({
     description: String,
     services: Array,
     range: Number,
-    zipcode: String
+    zipcode: String,
+    fname: String,
+    lname: String,
+    imgurl: String
 });
 exports.User = mongoose_1.model("User", exports.UserSchema);
 exports.default = exports.User;
