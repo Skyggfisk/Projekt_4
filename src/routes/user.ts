@@ -14,6 +14,14 @@ router.get("/", (req, res, next) => {
   });
 });
 
+router.get("/:id", (req, res, next) => {
+  var id = req.body.id;
+  User.findById(id, function(err, user) {
+    if (err) return console.error(err);
+    res.json(user);
+  });
+});
+
 router.post("/", (req, res, next) => {
   var user = new User({
     facebookid: req.body.facebookid,

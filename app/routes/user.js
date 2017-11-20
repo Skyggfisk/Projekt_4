@@ -13,6 +13,13 @@ router.get("/", (req, res, next) => {
         res.json(users);
     });
 });
+router.get("/:id", (req, res, next) => {
+    user_1.default.findById(function (err, user) {
+        if (err)
+            return console.error(err);
+        res.json(user);
+    });
+});
 router.post("/", (req, res, next) => {
     var user = new user_1.default({
         facebookid: req.body.facebookid,
