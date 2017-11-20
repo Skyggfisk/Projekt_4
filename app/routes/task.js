@@ -38,5 +38,14 @@ router.post("/", (req, res, next) => {
         res.send("it worked");
     });
 });
+router.delete("/:id", (req, res, next) => {
+    var query = task_1.default.where({
+        taskID: req.params.id
+    }).findOneAndRemove(function (err, task) {
+        if (err)
+            return console.error(err);
+        res.json(task);
+    });
+});
 exports.default = router;
 //# sourceMappingURL=task.js.map

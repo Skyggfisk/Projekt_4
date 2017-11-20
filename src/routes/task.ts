@@ -44,4 +44,14 @@ router.post("/", (req, res, next) => {
   });
 });
 
+// DELETE task by id
+router.delete("/:id", (req, res, next) => {
+  var query = Task.where({
+    taskID: req.params.id
+  }).findOneAndRemove(function(err, task) {
+    if (err) return console.error(err);
+    res.json(task);
+  });
+});
+
 export default router;
