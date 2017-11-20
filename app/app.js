@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 const index_1 = require("./routes/index");
 const user_1 = require("./routes/user");
 const categories_1 = require("./routes/categories");
-const task_1 = require("./models/task");
+const task_1 = require("./routes/task");
 const app = express();
 app.use(helmet());
 mongoose.connect("mongodb://admin:admin@ds121565.mlab.com:21565/projekt4");
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", index_1.default);
 app.use("/user", user_1.default);
-app.use("/task", task_1.Task);
+app.use("/task", task_1.default);
 app.use("/categories", categories_1.default);
 app.use((req, res, next) => {
     var err = new Error("Not Found");
