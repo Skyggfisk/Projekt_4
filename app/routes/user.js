@@ -47,5 +47,14 @@ router.post("/", (req, res, next) => {
         res.send("it worked");
     });
 });
+router.delete("/:id", (req, res, next) => {
+    var query = user_1.default.where({
+        facebookid: req.params.id
+    }).findOneAndRemove(function (err, user) {
+        if (err)
+            return console.error(err);
+        res.json(user);
+    });
+});
 exports.default = router;
 //# sourceMappingURL=user.js.map

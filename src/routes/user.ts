@@ -55,8 +55,13 @@ router.post("/", (req, res, next) => {
 });
 
 // DELETE user by id
-// router.delete("/:id", (req,res,next)=>{
-//   var query = User.where().findOneAndRemove()
-// })
+router.delete("/:id", (req, res, next) => {
+  var query = User.where({
+    facebookid: req.params.id
+  }).findOneAndRemove(function(err, user) {
+    if (err) return console.error(err);
+    res.json(user);
+  });
+});
 
 export default router;
