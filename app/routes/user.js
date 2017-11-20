@@ -13,9 +13,17 @@ router.get("/", (req, res, next) => {
         res.json(users);
     });
 });
-router.get("/:id", (req, res, next) => {
+router.get("/oid/:id", (req, res, next) => {
     var id = req.params.id;
     user_1.default.findById(id, function (err, user) {
+        if (err)
+            return console.error(err);
+        res.json(user);
+    });
+});
+router.get("/:id", (req, res, next) => {
+    var query = user_1.default.where({ facebookid: req.params.id });
+    query.findOne(function (err, user) {
         if (err)
             return console.error(err);
         res.json(user);
