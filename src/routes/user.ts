@@ -54,4 +54,9 @@ router.post("/", (req, res, next) => {
   });
 });
 
+// DELETE user by id
+// router.delete("/:id", (req,res,next)=>{
+//   var query = User.where().findOneAndRemove()
+// })
+
 export default router;
