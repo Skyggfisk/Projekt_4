@@ -69,7 +69,7 @@ router.use(function(req, res, next) {
 });
 
 // POST a new user
-router.post("/", (req, res, next) => {
+router.post("/:id", (req, res, next) => {
   var user = new User({
     facebookid: req.body.facebookid,
     description: req.body.description,
@@ -89,9 +89,43 @@ router.post("/", (req, res, next) => {
   });
 });
 
+// UPDATE user by id
+router.put("/:id", (req, res, next) => {
+  var user = User.where({ facebookid: req.params.id });
+  return user.findOne(function(err, user) {
+    user.description = req.body.description || user.description;
+    user.services = req.body.services || user.services;
+    user.range = req.body.range || user.range;
+    user.zipcode = req.body.zipcode || user.zipcode;
+    user.fname = req.body.fname || user.fname;
+    user.lname = req.body.lname || user.lname;
+    user.imgurl = req.body.imgurl || user.imgurl;
+    return user.save(function(err) {
+      if (err) return console.log(err);
+      console.log(
+        moment().format("h:mm:ss a") +
+          " - User: " +
+          user.facebookid +
+          " updated!"
+      );
+      res.send(
+        moment().format("h:mm:ss a") +
+          " - User: " +
+          user.facebookid +
+          " updated!"
+      );
+    });
+  });
+});
+
 // DELETE user by id
-// router.delete("/:id", (req,res,next)=>{
-//   var query = User.where().findOneAndRemove()
-// })
+router.delete("/:id", (req, res, next) => {
+  var query = User.where({
+    facebookid: req.params.id
+  }).findOneAndRemove(function(err, user) {
+    if (err) return console.error(err);
+    res.json(user);
+  });
+});
 
 export default router;

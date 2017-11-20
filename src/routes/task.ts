@@ -44,4 +44,36 @@ router.post("/", (req, res, next) => {
   });
 });
 
+// UPDATE task by id
+router.put("/:id", (req, res, next) => {
+  var task = Task.where({ facebookid: req.params.id });
+  return task.findOne(function(err, user) {
+    task.title = req.body.title || task.title;
+    task.creationDate = req.body.creationDate || task.creationDate;
+    task.date = req.body.date || task.date;
+    task.description = req.body.description || task.description;
+    task.categories = req.body.categories || task.categories;
+    task.salary = req.body.salary || task.salary;
+    return task.save(function(err) {
+      if (err) return console.log(err);
+      console.log(
+        moment().format("h:mm:ss a") + " - Task: " + task.taskID + " updated!"
+      );
+      res.send(
+        moment().format("h:mm:ss a") + " - Task: " + task.taskID + " updated!"
+      );
+    });
+  });
+});
+
+// DELETE task by id
+router.delete("/:id", (req, res, next) => {
+  var query = Task.where({
+    taskID: req.params.id
+  }).findOneAndRemove(function(err, task) {
+    if (err) return console.error(err);
+    res.json(task);
+  });
+});
+
 export default router;

@@ -31,6 +31,7 @@ router.get("/:id", (req, res, next) => {
         res.json(user);
     });
 });
+<<<<<<< HEAD
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers["x-access-token"];
     if (token) {
@@ -55,6 +56,9 @@ router.use(function (req, res, next) {
     }
 });
 router.post("/", (req, res, next) => {
+=======
+router.post("/:id", (req, res, next) => {
+>>>>>>> 7bed8369a12d96b7d836b90a1aa404cda20c9625
     var user = new user_1.default({
         facebookid: req.body.facebookid,
         description: req.body.description,
@@ -70,6 +74,39 @@ router.post("/", (req, res, next) => {
             return console.log(err);
         console.log(moment().format("h:mm:ss a") + " - User: " + user.facebookid + " saved!");
         res.send("it worked");
+    });
+});
+router.put("/:id", (req, res, next) => {
+    var user = user_1.default.where({ facebookid: req.params.id });
+    return user.findOne(function (err, user) {
+        user.description = req.body.description || user.description;
+        user.services = req.body.services || user.services;
+        user.range = req.body.range || user.range;
+        user.zipcode = req.body.zipcode || user.zipcode;
+        user.fname = req.body.fname || user.fname;
+        user.lname = req.body.lname || user.lname;
+        user.imgurl = req.body.imgurl || user.imgurl;
+        return user.save(function (err) {
+            if (err)
+                return console.log(err);
+            console.log(moment().format("h:mm:ss a") +
+                " - User: " +
+                user.facebookid +
+                " updated!");
+            res.send(moment().format("h:mm:ss a") +
+                " - User: " +
+                user.facebookid +
+                " updated!");
+        });
+    });
+});
+router.delete("/:id", (req, res, next) => {
+    var query = user_1.default.where({
+        facebookid: req.params.id
+    }).findOneAndRemove(function (err, user) {
+        if (err)
+            return console.error(err);
+        res.json(user);
     });
 });
 exports.default = router;
