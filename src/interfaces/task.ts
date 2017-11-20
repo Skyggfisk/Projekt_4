@@ -3,6 +3,7 @@ import { ICategory } from "./category";
 export interface ITask {
   title: string;
   creationDate: Date;
-  Description: string;
+  description: string;
   categories: Array<ICategory>;
+  taskID: string;
 }
