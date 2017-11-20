@@ -8,16 +8,20 @@ import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
 import * as mongoose from "mongoose";
+import * as jsonwebtoken from "jsonwebtoken";
 import index from "./routes/index";
 import user from "./routes/user";
+import devuser from "./routes/devuser";
 import categories from "./routes/categories";
 import task from "./routes/task";
+import config from "./config";
 
 const app: express.Express = express();
 
 app.use(helmet());
 
-mongoose.connect("mongodb://admin:admin@ds121565.mlab.com:21565/projekt4");
+mongoose.connect(config.database);
+app.set("superSecret", config.secret);
 
 //view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -36,6 +40,7 @@ app.use("/", index);
 app.use("/user", user);
 app.use("/task", task);
 app.use("/categories", categories);
+app.use("/devuser", devuser);
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {
