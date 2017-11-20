@@ -7,6 +7,7 @@ import User from "../models/user";
 export let Schema = mongoose.Schema;
 const router = express.Router();
 
+// GET all users
 router.get("/", (req, res, next) => {
   User.find(function(err, users) {
     if (err) return console.error(err);
@@ -14,14 +15,16 @@ router.get("/", (req, res, next) => {
   });
 });
 
+// GET user by id
 router.get("/:id", (req, res, next) => {
-  var id = req.body.id;
+  var id = req.params.id;
   User.findById(id, function(err, user) {
     if (err) return console.error(err);
     res.json(user);
   });
 });
 
+// POST a new user
 router.post("/", (req, res, next) => {
   var user = new User({
     facebookid: req.body.facebookid,
