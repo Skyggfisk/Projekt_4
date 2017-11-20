@@ -25,11 +25,17 @@ router.post("/", (req, res, next) => {
     var task = new task_1.default({
         title: req.body.title,
         creationDate: req.body.creationDate,
+<<<<<<< HEAD
         date: req.body.date,
         description: req.body.description,
         categories: req.body.categories,
         taskID: req.body.taskID,
         salary: req.body.salary
+=======
+        description: req.body.description,
+        categories: req.body.categories,
+        taskID: req.body.taskID
+>>>>>>> b59825bb8558362232923f6cf63df6ed9e7ba5c2
     });
     task.save(function (err, task) {
         if (err)

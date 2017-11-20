@@ -11,6 +11,7 @@ import * as mongoose from "mongoose";
 import index from "./routes/index";
 import user from "./routes/user";
 import categories from "./routes/categories";
+import task from "./routes/task";
 
 const app: express.Express = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // define routes
 app.use("/", index);
 app.use("/user", user);
+app.use("/task", task);
 app.use("/categories", categories);
 
 //catch 404 and forward to error handler
