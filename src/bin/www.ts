@@ -9,9 +9,9 @@ import * as https from "https";
 import * as fs from "fs";
 
 // ssl things
-var key = fs.readFileSync("../../../../private.key");
-var cert = fs.readFileSync("../../../../primary.crt");
-var ca = fs.readFileSync("../../../../server.crt");
+var key = fs.readFileSync("../../../private.key");
+var cert = fs.readFileSync("../../../primary.crt");
+var ca = fs.readFileSync("../../../server.crt");
 
 var SSLoptions = {
   key: key,
