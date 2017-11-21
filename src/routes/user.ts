@@ -69,7 +69,7 @@ router.use(function(req, res, next) {
 });
 
 // POST a new user
-router.post("/:id", (req, res, next) => {
+router.post("/", (req, res, next) => {
   var user = new User({
     facebookid: req.body.facebookid,
     description: req.body.description,

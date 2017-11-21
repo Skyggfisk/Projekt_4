@@ -31,7 +31,6 @@ router.get("/:id", (req, res, next) => {
         res.json(user);
     });
 });
-<<<<<<< HEAD
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers["x-access-token"];
     if (token) {
@@ -43,7 +42,7 @@ router.use(function (req, res, next) {
                 });
             }
             else {
-                req.decoded = decoded;
+                req["decoded"] = decoded;
                 next();
             }
         });
@@ -56,9 +55,6 @@ router.use(function (req, res, next) {
     }
 });
 router.post("/", (req, res, next) => {
-=======
-router.post("/:id", (req, res, next) => {
->>>>>>> 7bed8369a12d96b7d836b90a1aa404cda20c9625
     var user = new user_1.default({
         facebookid: req.body.facebookid,
         description: req.body.description,
