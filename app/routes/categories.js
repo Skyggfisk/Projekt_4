@@ -12,5 +12,12 @@ router.get("/", (req, res, next) => {
         res.json(categories);
     });
 });
+router.get("/:name", (req, res, next) => {
+    category_1.default.find({ name: { $regex: req.params.name, $options: "i" } }, function (err, categories) {
+        if (err)
+            return console.error(err);
+        res.json(categories);
+    });
+});
 exports.default = router;
 //# sourceMappingURL=categories.js.map

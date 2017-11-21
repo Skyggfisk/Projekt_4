@@ -15,4 +15,14 @@ router.get("/", (req, res, next) => {
   });
 });
 
+router.get("/:name", (req, res, next) => {
+  Category.find({ name: { $regex: req.params.name, $options: "i" } }, function(
+    err,
+    categories
+  ) {
+    if (err) return console.error(err);
+    res.json(categories);
+  });
+});
+
 export default router;
