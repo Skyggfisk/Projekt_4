@@ -6,7 +6,6 @@ import * as favicon from "serve-favicon";
 import * as logger from "morgan";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
-import * as helmet from "helmet";
 import * as mongoose from "mongoose";
 import * as jsonwebtoken from "jsonwebtoken";
 import index from "./routes/index";
@@ -17,8 +16,6 @@ import task from "./routes/task";
 import config from "./config";
 
 const app: express.Express = express();
-
-app.use(helmet());
 
 mongoose.connect(config.database);
 app.set("superSecret", config.secret);
