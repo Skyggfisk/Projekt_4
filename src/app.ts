@@ -8,6 +8,7 @@ import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 import * as jsonwebtoken from "jsonwebtoken";
+import * as fs from "fs";
 import index from "./routes/index";
 import user from "./routes/user";
 import devuser from "./routes/devuser";

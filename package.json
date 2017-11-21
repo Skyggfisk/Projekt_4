@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "tsc && node app/bin/www.js",
-    "serv": "node app/bin/www.js"
+    "start": "node app/bin/www.js"
   },
   "dependencies": {
     "@types/mongodb": "^2.2.15",
