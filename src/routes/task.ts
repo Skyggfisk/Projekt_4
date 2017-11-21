@@ -81,8 +81,7 @@ router.post("/", (req, res, next) => {
 
 // UPDATE task by id
 router.put("/:id", (req, res, next) => {
-  var task = Task.where({ facebookid: req.params.id });
-  return task.findOne(function(err, user) {
+  var task = Task.findOne({ taskID: req.body.taskID }, function(err, user) {
     task.title = req.body.title || task.title;
     task.creationDate = req.body.creationDate || task.creationDate;
     task.date = req.body.date || task.date;
@@ -103,9 +102,7 @@ router.put("/:id", (req, res, next) => {
 
 // DELETE task by id
 router.delete("/:id", (req, res, next) => {
-  var query = Task.where({
-    taskID: req.params.id
-  }).findOneAndRemove(function(err, task) {
+  Task.findOneAndRemove({ taskID: req.params.id }, function(err, task) {
     if (err) return console.error(err);
     res.json(task);
   });

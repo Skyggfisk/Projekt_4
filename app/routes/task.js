@@ -64,8 +64,7 @@ router.post("/", (req, res, next) => {
     });
 });
 router.put("/:id", (req, res, next) => {
-    var task = task_1.default.where({ facebookid: req.params.id });
-    return task.findOne(function (err, user) {
+    var task = task_1.default.findOne({ taskID: req.body.taskID }, function (err, user) {
         task.title = req.body.title || task.title;
         task.creationDate = req.body.creationDate || task.creationDate;
         task.date = req.body.date || task.date;
@@ -81,9 +80,7 @@ router.put("/:id", (req, res, next) => {
     });
 });
 router.delete("/:id", (req, res, next) => {
-    var query = task_1.default.where({
-        taskID: req.params.id
-    }).findOneAndRemove(function (err, task) {
+    task_1.default.findOneAndRemove({ taskID: req.params.id }, function (err, task) {
         if (err)
             return console.error(err);
         res.json(task);

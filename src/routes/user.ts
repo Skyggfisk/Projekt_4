@@ -28,8 +28,7 @@ router.get("/oid/:id", (req, res, next) => {
 
 // GET user by facebookid
 router.get("/:id", (req, res, next) => {
-  var query = User.where({ facebookid: req.params.id });
-  query.findOne(function(err, user) {
+  User.findOne({ facebookid: req.params.id }, function(err, user) {
     if (err) return console.error(err);
     res.json(user);
   });
@@ -91,8 +90,7 @@ router.post("/", (req, res, next) => {
 
 // UPDATE user by id
 router.put("/:id", (req, res, next) => {
-  var user = User.where({ facebookid: req.params.id });
-  return user.findOne(function(err, user) {
+  var user = User.findOne({ facebookid: req.params.id }, function(err, user) {
     user.description = req.body.description || user.description;
     user.services = req.body.services || user.services;
     user.range = req.body.range || user.range;
@@ -120,9 +118,7 @@ router.put("/:id", (req, res, next) => {
 
 // DELETE user by id
 router.delete("/:id", (req, res, next) => {
-  var query = User.where({
-    facebookid: req.params.id
-  }).findOneAndRemove(function(err, user) {
+  User.findOneAndRemove({ facebookid: req.params.id }, function(err, user) {
     if (err) return console.error(err);
     res.json(user);
   });
