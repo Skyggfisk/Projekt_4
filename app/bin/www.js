@@ -4,9 +4,9 @@ const app_1 = require("../app");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-var key = fs.readFileSync("../../../private.key");
-var cert = fs.readFileSync("../../../primary.crt");
-var ca = fs.readFileSync("../../../server.crt");
+var key = fs.readFileSync("../../../../private.key");
+var cert = fs.readFileSync("../../../../primary.crt");
+var ca = fs.readFileSync("../../../../server.crt");
 var SSLoptions = {
     key: key,
     cert: cert,
