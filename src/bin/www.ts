@@ -5,6 +5,21 @@
 
 import app from "../app";
 import * as http from "http";
+import * as https from "https";
+import * as fs from "fs";
+
+// ssl things
+var key = fs.readFileSync("../../private.key");
+var cert = fs.readFileSync("../../primary.crt");
+var ca = fs.readFileSync("../../server.crt");
+
+var SSLoptions = {
+  key: key,
+  cert: cert,
+  ca: ca
+};
+
+https.createServer(SSLoptions, app).listen(443);
 
 /**
  * Get port from environment and store in Express.
@@ -25,7 +40,13 @@ var server = http.createServer(app);
 
 server.listen(port, onListening);
 server.on("error", onError);
-
+app.use(function(req, res, next) {
+  if (req.secure) {
+    next();
+  } else {
+    res.redirect("https://" + req.headers.host + req.url);
+  }
+});
 /**
  * Normalize a port into a number,string,or false.
  */

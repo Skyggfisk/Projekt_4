@@ -1,7 +1,7 @@
 import { ICategorynprice } from "./categorynprice";
 
 export interface IUser {
-  id: string;
+  facebookid: string;
   description: string;
   services: Array<ICategorynprice>;
   range: number;
