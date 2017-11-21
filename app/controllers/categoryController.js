@@ -1,5 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const router = express.Router();
+const category_1 = require("../models/category");
+class CategoryController {
+    getAll(req, res, next) {
+        category_1.Category.find((err, categories) => {
+            if (err)
+                return console.error(err.stack);
+            res.json(categories);
+        });
+    }
+}
+exports.CategoryController = CategoryController;
 //# sourceMappingURL=categoryController.js.map
