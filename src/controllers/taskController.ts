@@ -1,9 +1,10 @@
+"use strict";
+
 import { Request, Response, NextFunction } from "express";
 import { Task, ITaskModel } from "../models/task";
 import { Error } from "mongoose";
 import * as moment from "moment";
-
-"use strict";
+import { ITask } from "../interfaces/task";
 
 export class TaskController {
   // GET all tasks
@@ -39,5 +40,46 @@ export class TaskController {
       );
       res.send("it worked");
     });
+  }
+
+  // PUT task by id
+  updateTask(req: Request, res: Response, next: NextFunction) {
+    var task = Task.findOne(
+      { taskID: req.params.id },
+      (err: Error, task: ITaskModel) => {
+        task.title = req.body.title || task.title;
+        task.creationDate = req.body.creationDate || task.creationDate;
+        task.date = req.body.date || task.date;
+        task.description = req.body.description || task.description;
+        task.categories = req.body.categories || task.categories;
+        task.salary = req.body.salary || task.salary;
+        return task.save((err: Error, task: ITaskModel) => {
+          if (err) return console.log(err.stack);
+          console.log(
+            moment().format("h:mm:ss a") +
+              " - Task: " +
+              task.taskID +
+              " updated!"
+          );
+          res.send(
+            moment().format("h:mm:ss a") +
+              " - Task: " +
+              task.taskID +
+              " updated!"
+          );
+        });
+      }
+    );
+  }
+
+  // DELETE task by id
+  deleteTask(req: Request, res: Response, next: NextFunction) {
+    Task.findOneAndRemove(
+      { taskID: req.params.id },
+      (err: Error, task: ITaskModel) => {
+        if (err) return console.error(err.stack);
+        res.json(task);
+      }
+    );
   }
 }

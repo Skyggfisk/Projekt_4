@@ -7,17 +7,10 @@ export let Schema = mongoose.Schema;
 const router = express.Router();
 const categoryController = new CategoryController();
 
-/* GET all categories as json array */
+// GET all categories as json array
 router.get("/", categoryController.getAll);
 
-router.get("/:name", (req, res, next) => {
-  Category.find({ name: { $regex: req.params.name, $options: "i" } }, function(
-    err,
-    categories
-  ) {
-    if (err) return console.error(err);
-    res.json(categories);
-  });
-});
+// GET all categories with a name like params.name
+router.get("/:name", categoryController.getLikeName);
 
 export default router;

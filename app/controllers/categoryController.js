@@ -9,6 +9,13 @@ class CategoryController {
             res.json(categories);
         });
     }
+    getLikeName(req, res, next) {
+        category_1.Category.find({ name: { $regex: req.params.name, $options: "i" } }, (err, categories) => {
+            if (err)
+                return console.error(err.stack);
+            res.json(categories);
+        });
+    }
 }
 exports.CategoryController = CategoryController;
 //# sourceMappingURL=categoryController.js.map
