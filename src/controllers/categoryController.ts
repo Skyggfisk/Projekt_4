@@ -3,6 +3,7 @@ import { Response, NextFunction, Request } from "express";
 import { Category } from "../models/category";
 import { json } from "body-parser";
 
+// GET all categories as json array
 export class CategoryController {
   getAll(req: Request, res: Response, next: NextFunction) {
     Category.find((err: Error, categories: JSON) => {

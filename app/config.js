@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const config = {
     secret: "lolle",
-    database: "mongodb://admin:admin@ds121565.mlab.com:21565/projekt4"
+    database: "mongodb://favorapp:favorapp@ds117956.mlab.com:17956/favorappdb"
 };
 exports.default = config;
 //# sourceMappingURL=config.js.map

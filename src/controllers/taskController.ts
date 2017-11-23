@@ -16,7 +16,7 @@ export class TaskController {
 
   // GET task by id
   getOne(req: Request, res: Response, next: NextFunction) {
-    Task.findOne({ taskID: req.params.taskID }, (err: Error, task: JSON) => {
+    Task.findOne({ taskID: req.params.id }, (err: Error, task: JSON) => {
       if (err) return console.error(err.stack);
       res.json(task);
     });

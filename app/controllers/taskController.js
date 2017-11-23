@@ -12,7 +12,7 @@ class TaskController {
         });
     }
     getOne(req, res, next) {
-        task_1.Task.findOne({ taskID: req.params.taskID }, (err, task) => {
+        task_1.Task.findOne({ taskID: req.params.id }, (err, task) => {
             if (err)
                 return console.error(err.stack);
             res.json(task);

@@ -6,8 +6,10 @@ const moment = require("moment");
 const task_1 = require("../models/task");
 const jwt = require("jsonwebtoken");
 const app_1 = require("../app");
+const taskController_1 = require("../controllers/taskController");
 exports.Schema = mongoose.Schema;
 const router = express.Router();
+const taskController = new taskController_1.TaskController();
 router.get("/", (req, res, next) => {
     task_1.default.find(function (err, tasks) {
         if (err)
@@ -17,7 +19,7 @@ router.get("/", (req, res, next) => {
 });
 router.get("/:id", (req, res, next) => {
     var id = req.params.id;
-    task_1.default.findById(id, function (err, tasks) {
+    task_1.default.findOne({ taskID: req.params.id }, function (err, tasks) {
         if (err)
             return console.error(err);
         res.json(tasks);

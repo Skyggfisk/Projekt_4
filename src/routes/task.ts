@@ -6,8 +6,10 @@ import * as moment from "moment";
 import Task from "../models/task";
 import * as jwt from "jsonwebtoken";
 import app from "../app";
+import { TaskController } from "../controllers/taskController";
 export let Schema = mongoose.Schema;
 const router = express.Router();
+const taskController = new TaskController();
 
 // GET all tasks
 router.get("/", (req, res, next) => {
@@ -17,10 +19,10 @@ router.get("/", (req, res, next) => {
   });
 });
 
-// GET task by id (stupid mongoid)
+// GET task by taskID
 router.get("/:id", (req, res, next) => {
   var id = req.params.id;
-  Task.findById(id, function(err, tasks) {
+  Task.findOne({ taskID: req.params.id }, function(err, tasks) {
     if (err) return console.error(err);
     res.json(tasks);
   });
