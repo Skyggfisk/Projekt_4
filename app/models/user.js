@@ -11,6 +11,6 @@ var UserSchema = new mongoose_1.Schema({
     lname: String,
     imgurl: String
 });
-const User = mongoose_1.model("User", UserSchema);
-exports.default = User;
+exports.User = mongoose_1.model("User", UserSchema);
+exports.default = exports.User;
 //# sourceMappingURL=user.js.map

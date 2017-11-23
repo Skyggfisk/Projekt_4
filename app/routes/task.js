@@ -2,29 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const mongoose = require("mongoose");
-const moment = require("moment");
-const task_1 = require("../models/task");
 const jwt = require("jsonwebtoken");
 const app_1 = require("../app");
 const taskController_1 = require("../controllers/taskController");
 exports.Schema = mongoose.Schema;
 const router = express.Router();
 const taskController = new taskController_1.TaskController();
-router.get("/", (req, res, next) => {
-    task_1.default.find(function (err, tasks) {
-        if (err)
-            return console.error(err);
-        res.json(tasks);
-    });
-});
-router.get("/:id", (req, res, next) => {
-    var id = req.params.id;
-    task_1.default.findOne({ taskID: req.params.id }, function (err, tasks) {
-        if (err)
-            return console.error(err);
-        res.json(tasks);
-    });
-});
+router.get("/", taskController.getAll);
+router.get("/:id", taskController.getOne);
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers["x-access-token"];
     if (token) {
@@ -48,45 +33,8 @@ router.use(function (req, res, next) {
         });
     }
 });
-router.post("/", (req, res, next) => {
-    var task = new task_1.default({
-        title: req.body.title,
-        creationDate: req.body.creationDate,
-        date: req.body.date,
-        description: req.body.description,
-        categories: req.body.categories,
-        taskID: req.body.taskID,
-        salary: req.body.salary
-    });
-    task.save(function (err, task) {
-        if (err)
-            return console.log(err);
-        console.log(moment().format("h:mm:ss a") + " - Task: " + task.taskID + " saved!");
-        res.send("it worked");
-    });
-});
-router.put("/:id", (req, res, next) => {
-    var task = task_1.default.findOne({ taskID: req.body.taskID }, function (err, user) {
-        task.title = req.body.title || task.title;
-        task.creationDate = req.body.creationDate || task.creationDate;
-        task.date = req.body.date || task.date;
-        task.description = req.body.description || task.description;
-        task.categories = req.body.categories || task.categories;
-        task.salary = req.body.salary || task.salary;
-        return task.save(function (err) {
-            if (err)
-                return console.log(err);
-            console.log(moment().format("h:mm:ss a") + " - Task: " + task.taskID + " updated!");
-            res.send(moment().format("h:mm:ss a") + " - Task: " + task.taskID + " updated!");
-        });
-    });
-});
-router.delete("/:id", (req, res, next) => {
-    task_1.default.findOneAndRemove({ taskID: req.params.id }, function (err, task) {
-        if (err)
-            return console.error(err);
-        res.json(task);
-    });
-});
+router.post("/", taskController.createTask);
+router.put("/:id", taskController.updateTask);
+router.delete("/:id", taskController.deleteTask);
 exports.default = router;
 //# sourceMappingURL=task.js.map
