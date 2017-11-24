@@ -1,5 +1,6 @@
 import { Document, Schema, Model, model } from "mongoose";
 import { IUser } from "../interfaces/user";
+import { Conversation } from "../models/conversation";
 
 export interface IUserModel extends IUser, Document {}
 

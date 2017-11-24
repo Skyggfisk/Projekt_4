@@ -15,6 +15,7 @@ import devuser from "./routes/devuser";
 import categories from "./routes/categories";
 import task from "./routes/task";
 import config from "./config";
+import chat from "./routes/chat";
 
 const app: express.Express = express();
 
@@ -39,6 +40,7 @@ app.use("/user", user);
 app.use("/task", task);
 app.use("/categories", categories);
 app.use("/devuser", devuser);
+app.use("/conversation", chat);
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {

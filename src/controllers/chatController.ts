@@ -1,14 +1,26 @@
 "use strict";
-const Conversation = require("../models/conversation"),
-  Message = require("../models/message"),
-  User = require("../models/user");
+
+import { Request, Response, NextFunction } from "express";
+import { Error } from "mongoose";
+import { Conversation, IConversationModel } from "../models/conversation";
+import { Message, IMessageModel } from "../models/message";
+import { User } from "../models/user";
 
 export class ChatController {
-  getConversations = function(req, res, next) {
-    // Only return one message from each conversation to display as snippet
-    Conversation.find({ participants: req.user.facebookid })
+  // GET all conversations
+  getAll(req: Request, res: Response, next: NextFunction) {
+    Conversation.find((err: Error, conversations: JSON) => {
+      if (err) return console.error(err.stack);
+      res.json(conversations);
+    });
+  }
+
+  // GET all conversations for a user.
+  // Display one message as snippet for each conversation
+  getConversations(req: Request, res: Response, next: NextFunction) {
+    Conversation.find({ participants: req.params.facebookid })
       .select("facebookid")
-      .exec(function(err, conversations) {
+      .exec((err: Error, conversations: IConversationModel[]) => {
         if (err) {
           res.send({ error: err });
           return next(err);
@@ -16,7 +28,7 @@ export class ChatController {
 
         // Set up empty array to hold conversations + most recent message
         let fullConversations = [];
-        conversations.forEach(function(conversation) {
+        conversations.forEach((conversation: IConversationModel) => {
           Message.find({ conversationId: conversation._id })
             .sort("-createdAt")
             .limit(1)
@@ -24,7 +36,7 @@ export class ChatController {
               path: "author",
               select: "user.fname user.lname"
             })
-            .exec(function(err, message) {
+            .exec((err: Error, message: IMessageModel[]) => {
               if (err) {
                 res.send({ error: err });
                 return next(err);
@@ -38,8 +50,10 @@ export class ChatController {
             });
         });
       });
-  };
-  getConversation = function(req, res, next) {
+  }
+
+  // GET conversation by conversationId
+  getConversation(req: Request, res: Response, next: NextFunction) {
     Message.find({ conversationId: req.params.conversationId })
       .select("createdAt body author")
       .sort("-createdAt")
@@ -47,7 +61,7 @@ export class ChatController {
         path: "author",
         select: "user.fname user.lname"
       })
-      .exec(function(err, messages) {
+      .exec((err: Error, messages: IMessageModel[]) => {
         if (err) {
           res.send({ error: err });
           return next(err);
@@ -55,9 +69,10 @@ export class ChatController {
 
         res.status(200).json({ conversation: messages });
       });
-  };
+  }
 
-  newConversation = function(req, res, next) {
+  // POST new conversation
+  newConversation(req: Request, res: Response, next: NextFunction) {
     if (!req.params.recipient) {
       res
         .status(422)
@@ -71,10 +86,10 @@ export class ChatController {
     }
 
     const conversation = new Conversation({
-      participants: [req.user.facebookid, req.params.recipient]
+      participants: [req.params.facebookid, req.params.recipient]
     });
 
-    conversation.save(function(err, newConversation) {
+    conversation.save((err: Error, newConversation: IConversationModel) => {
       if (err) {
         res.send({ error: err });
         return next(err);
@@ -83,10 +98,10 @@ export class ChatController {
       const message = new Message({
         conversationId: newConversation._id,
         body: req.body.composedMessage,
-        author: req.user.facebookid
+        author: req.params.facebookid
       });
 
-      message.save(function(err, newMessage) {
+      message.save((err: Error, newMessage: IMessageModel) => {
         if (err) {
           res.send({ error: err });
           return next(err);
@@ -99,16 +114,17 @@ export class ChatController {
         return next();
       });
     });
-  };
+  }
 
-  sendReply = function(req, res, next) {
+  // POST reply to a conversation
+  sendReply(req: Request, res: Response, next: NextFunction) {
     const reply = new Message({
       conversationId: req.params.conversationId,
       body: req.body.composedMessage,
-      author: req.user.facebookid
+      author: req.params.facebookid
     });
 
-    reply.save(function(err, sentReply) {
+    reply.save((err: Error, sentReply: IMessageModel) => {
       if (err) {
         res.send({ error: err });
         return next(err);
@@ -117,14 +133,15 @@ export class ChatController {
       res.status(200).json({ message: "Reply successfully sent!" });
       return next;
     });
-  };
+  }
+
   // DELETE Route to Delete Conversation
-  deleteConversation = function(req, res, next) {
+  deleteConversation(req: Request, res: Response, next: NextFunction) {
     Conversation.findOneAndRemove(
       {
         $and: [
           { _id: req.params.conversationId },
-          { participants: req.user.facebookid }
+          { participants: req.params.facebookid }
         ]
       },
       function(err) {
@@ -137,32 +154,5 @@ export class ChatController {
         return next();
       }
     );
-  };
-
-  // PUT Route to Update Message
-  updateMessage = function(req, res, next) {
-    Conversation.find(
-      {
-        $and: [{ _id: req.params.messageId }, { author: req.user.facebookid }]
-      },
-      function(err, message) {
-        if (err) {
-          res.send({ error: err });
-          return next(err);
-        }
-
-        message.body = req.body.composedMessage;
-
-        message.save(function(err, updatedMessage) {
-          if (err) {
-            res.send({ error: err });
-            return next(err);
-          }
-
-          res.status(200).json({ message: "Message updated!" });
-          return next();
-        });
-      }
-    );
-  };
+  }
 }

@@ -1,7 +1,7 @@
 "use strict";
 /**
  * Module dependencies.
-*/
+ */
 
 import app from "../app";
 import * as http from "http";
