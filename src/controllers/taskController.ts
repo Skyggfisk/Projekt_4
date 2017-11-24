@@ -4,7 +4,6 @@ import { Request, Response, NextFunction } from "express";
 import { Task, ITaskModel } from "../models/task";
 import { Error } from "mongoose";
 import * as moment from "moment";
-import { ITask } from "../interfaces/task";
 
 export class TaskController {
   // GET all tasks

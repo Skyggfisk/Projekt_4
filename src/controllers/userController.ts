@@ -2,10 +2,8 @@
 
 import { Request, Response, NextFunction } from "express";
 import { User, IUserModel } from "../models/user";
-import { IUser } from "../interfaces/user";
 import { Error } from "mongoose";
 import * as moment from "moment";
-import { ITaskModel } from "../models/task";
 
 export class UserController {
   // GET all users
