@@ -28,7 +28,7 @@ app.use("/user", user_1.default);
 app.use("/task", task_1.default);
 app.use("/categories", categories_1.default);
 app.use("/devuser", devuser_1.default);
-app.use("/conversation", chat_1.default);
+app.use("/chat", chat_1.default);
 app.use((req, res, next) => {
     var err = new Error("Not Found");
     err["status"] = 404;

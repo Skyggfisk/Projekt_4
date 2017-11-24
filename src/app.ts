@@ -40,7 +40,7 @@ app.use("/user", user);
 app.use("/task", task);
 app.use("/categories", categories);
 app.use("/devuser", devuser);
-app.use("/conversation", chat);
+app.use("/chat", chat);
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {
