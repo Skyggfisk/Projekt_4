@@ -2,19 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("../app");
 const http = require("http");
-const https = require("https");
-const fs = require("fs");
 const socketstuff_1 = require("../socketstuff");
 const socketio = new socketstuff_1.Socketio();
-var key = fs.readFileSync("/home/ubuntu/private.key");
-var cert = fs.readFileSync("/home/ubuntu/primary.crt");
-var ca = fs.readFileSync("/home/ubuntu/server.crt");
-var SSLoptions = {
-    key: key,
-    cert: cert,
-    ca: ca
-};
-https.createServer(SSLoptions, app_1.default).listen(443);
 const port = normalizePort(process.env.PORT || 3000);
 app_1.default.set("port", port);
 var server = http.createServer(app_1.default);

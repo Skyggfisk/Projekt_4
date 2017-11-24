@@ -1,7 +1,7 @@
 "use strict";
 
 import { Request, Response, NextFunction } from "express";
-import { Error } from "mongoose";
+import { Error, Types } from "mongoose";
 import { Conversation, IConversationModel } from "../models/conversation";
 import { Message, IMessageModel } from "../models/message";
 import { User } from "../models/user";
@@ -85,8 +85,9 @@ export class ChatController {
       return next();
     }
 
+    // var myArray = new Array();
     const conversation = new Conversation({
-      participants: [req.params.facebookid, req.params.recipient]
+      // participants: [{ type: req.params.facebookid, ref: req.params.recipient }]
     });
 
     conversation.save((err: Error, newConversation: IConversationModel) => {
@@ -98,7 +99,7 @@ export class ChatController {
       const message = new Message({
         conversationId: newConversation._id,
         body: req.body.composedMessage,
-        author: req.params.facebookid
+        author: Types.ObjectId(req.params.facebookid)
       });
 
       message.save((err: Error, newMessage: IMessageModel) => {

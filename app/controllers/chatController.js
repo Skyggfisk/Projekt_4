@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
 const conversation_1 = require("../models/conversation");
 const message_1 = require("../models/message");
 class ChatController {
@@ -69,9 +70,7 @@ class ChatController {
             res.status(422).send({ error: "Please enter a message." });
             return next();
         }
-        const conversation = new conversation_1.Conversation({
-            participants: [req.params.facebookid, req.params.recipient]
-        });
+        const conversation = new conversation_1.Conversation({});
         conversation.save((err, newConversation) => {
             if (err) {
                 res.send({ error: err });
@@ -80,7 +79,7 @@ class ChatController {
             const message = new message_1.Message({
                 conversationId: newConversation._id,
                 body: req.body.composedMessage,
-                author: req.params.facebookid
+                author: mongoose_1.Types.ObjectId(req.params.facebookid)
             });
             message.save((err, newMessage) => {
                 if (err) {

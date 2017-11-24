@@ -18,10 +18,10 @@ router.get("/user/:facebookid", chatController.getConversations);
 router.get("/:conversationId", chatController.getConversation);
 
 // GET single conversation for user by id
-router.get("/user/:facebookid/:conversationid")
+router.get("/user/:facebookid/:conversationid");
 
 // POST new conversation
-router.post("/user/:facebookid/:recipient", chatController.newConversation);
+router.post("/new/:facebookid/:recipient", chatController.newConversation);
 
 // POST reply to a conversation
 router.post("/:facebookid/:conversationId", chatController.sendReply);
