@@ -4,8 +4,6 @@ const app_1 = require("../app");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-const socketstuff_1 = require("../socketstuff");
-const socketio = new socketstuff_1.Socketio();
 var key = fs.readFileSync("/home/ubuntu/private.key");
 var cert = fs.readFileSync("/home/ubuntu/primary.crt");
 var ca = fs.readFileSync("/home/ubuntu/server.crt");
@@ -62,5 +60,4 @@ function onListening() {
     console.log("Listening on " + bind);
 }
 const io = require("socket.io").listen(server);
-socketio.socketio(io);
 //# sourceMappingURL=www.js.map

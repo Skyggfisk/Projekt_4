@@ -7,8 +7,6 @@ import app from "../app";
 import * as http from "http";
 import * as https from "https";
 import * as fs from "fs";
-import { Socketio } from "../socketstuff";
-const socketio = new Socketio();
 
 // ssl things
 var key = fs.readFileSync("/home/ubuntu/private.key");
@@ -102,5 +100,3 @@ function onListening() {
 }
 
 const io = require("socket.io").listen(server);
-
-socketio.socketio(io);

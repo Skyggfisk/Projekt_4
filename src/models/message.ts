@@ -1,26 +1,16 @@
 import { Document, Schema, Model, model } from "mongoose";
+import { User } from "../models/user";
+import { IMessage } from "../interfaces/message";
 
-export interface IMessageModel extends Document {}
+export interface IMessageModel extends IMessage, Document {}
 
-export var MessageSchema: Schema = new Schema(
-  {
-    conversationId: {
-      type: Schema.Types.ObjectId,
-      required: true
-    },
-    body: {
-      type: String,
-      required: true
-    },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: "User"
-    }
-  },
-  {
-    timestamps: true // Saves createdAt and updatedAt as dates. createdAt will be our timestamp.
-  }
-);
+var MessageSchema: Schema = new Schema({
+  user: User,
+
+  message: String,
+  timeStamp: Date,
+  conversationID: String
+});
 
 export const Message: Model<IMessageModel> = model<IMessageModel>(
   "Message",

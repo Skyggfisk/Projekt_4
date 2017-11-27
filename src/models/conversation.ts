@@ -1,13 +1,17 @@
 import { Document, Schema, Model, model } from "mongoose";
+import { User } from "../models/user";
+import { Message } from "../models/message";
+import { IConversation } from "../interfaces/conversation";
 
-// Schema defines how chat messages will be stored in MongoDB
-export interface IConversationModel extends Document {}
+export interface IConversationModel extends IConversation, Document {}
 
-export var ConversationSchema: Schema = new Schema({
-  participants: [{ type: Schema.Types.ObjectId, ref: "User" }]
+var ConversationSchema: Schema = new Schema({
+  messages: Array,
+  user: User
 });
 
 export const Conversation: Model<IConversationModel> = model<
   IConversationModel
 >("Conversation", ConversationSchema);
+
 export default Conversation;

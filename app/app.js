@@ -11,8 +11,8 @@ const user_1 = require("./routes/user");
 const devuser_1 = require("./routes/devuser");
 const categories_1 = require("./routes/categories");
 const task_1 = require("./routes/task");
+const conversation_1 = require("./routes/conversation");
 const config_1 = require("./config");
-const chat_1 = require("./routes/chat");
 const app = express();
 mongoose.connect(config_1.default.database);
 app.set("superSecret", config_1.default.secret);
@@ -28,7 +28,7 @@ app.use("/user", user_1.default);
 app.use("/task", task_1.default);
 app.use("/categories", categories_1.default);
 app.use("/devuser", devuser_1.default);
-app.use("/chat", chat_1.default);
+app.use("/conversation", conversation_1.default);
 app.use((req, res, next) => {
     var err = new Error("Not Found");
     err["status"] = 404;

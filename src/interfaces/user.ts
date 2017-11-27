@@ -1,4 +1,5 @@
 import { ICategorynprice } from "./categorynprice";
+import { IConversation } from "./conversation";
 
 export interface IUser {
   facebookid: string;
@@ -9,4 +10,5 @@ export interface IUser {
   fname: string;
   lname: string;
   imgurl: string;
+  conversations: Array<IConversation>;
 }

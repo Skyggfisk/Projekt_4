@@ -1,6 +1,5 @@
 import { Document, Schema, Model, model } from "mongoose";
 import { IUser } from "../interfaces/user";
-import { Conversation } from "../models/conversation";
 
 export interface IUserModel extends IUser, Document {}
 
@@ -12,7 +11,8 @@ var UserSchema: Schema = new Schema({
   zipcode: String,
   fname: String,
   lname: String,
-  imgurl: String
+  imgurl: String,
+  conversations: Array
 });
 
 export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);
