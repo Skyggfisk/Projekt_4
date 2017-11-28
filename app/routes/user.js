@@ -10,6 +10,7 @@ const userController = new userController_1.UserController();
 const router = express.Router();
 router.get("/", userController.getAll);
 router.get("/:id", userController.getOne);
+router.get("/services/:category", userController.getAllForCategory);
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers["x-access-token"];
     if (token) {

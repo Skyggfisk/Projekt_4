@@ -25,6 +25,21 @@ export class UserController {
     );
   }
 
+  // GET users by category
+  getAllForCategory(req: Request, res: Response, next: NextFunction) {
+    User.aggregate(
+      {
+        $match: { services: { $elemMatch: { category: req.params.category } } }
+      },
+      { $unwind: "$services" },
+      { $match: { "services.category": req.params.category } },
+      (err: Error, users: IUserModel[]) => {
+        if (err) return console.error(err.stack);
+        res.json(users);
+      }
+    );
+  }
+
   // POST a new user
   createUser(req: Request, res: Response, next: NextFunction) {
     var user = new User({

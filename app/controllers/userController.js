@@ -17,6 +17,15 @@ class UserController {
             res.json(user);
         });
     }
+    getAllForCategory(req, res, next) {
+        user_1.User.aggregate({
+            $match: { services: { $elemMatch: { category: req.params.category } } }
+        }, { $unwind: "$services" }, { $match: { "services.category": req.params.category } }, (err, users) => {
+            if (err)
+                return console.error(err.stack);
+            res.json(users);
+        });
+    }
     createUser(req, res, next) {
         var user = new user_1.User({
             facebookid: req.body.facebookid,
