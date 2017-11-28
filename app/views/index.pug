@@ -2,4 +2,45 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Available user routes:
+  ul 
+    li GET 
+      a(href="/user") /user/
+    li GET 
+      a(href="/user/{id}") /user/{id}
+    li GET 
+      a(href="/user/services/{servicename}") /user/services/{servicename}
+    li POST /user?token={tokenid}
+      a(href="/user?token={tokenid}") /user?token={tokenid}
+    li PUT
+      a(href="/user/{id}?token={tokenid}") /user/{id}?token={tokenid}
+    li DELETE 
+      a(href="/user/{id}?token={tokenid}") /user/{id}?token={tokenid}
+  p Available category routes:
+  ul
+    li GET 
+      a(href="/category/") /category/
+    li GET 
+      a(href="/category/{name}") /category/{name}
+  p Available task routes:
+  ul
+    li GET 
+      a(href="/task/") /task/
+    li GET 
+      a(href="/task/{id}") /task/{id}
+    li POST 
+      a(href="/task?token={tokenid}") /task?token={tokenid}
+    li PUT 
+      a(href="/task/{id}?token={tokenid}") /task/{id}?token={tokenid}
+    li DELETE 
+      a(href="/task/{id}?token={tokenid}") /task/{id}?token={tokenid}
+  p Available conversation routes:
+  ul
+    li GET 
+      a(href="/conversation?token={tokenid}") /conversation?token={tokenid}
+    li GET 
+      a(href="/conversation/{id}?token={tokenid}") /conversation/{id}?token={tokenid}
+    li POST 
+      a(href="/conversation?token={tokenid}") /conversation?token={tokenid}
+    li POST 
+      a(href="/conversation/message?token={tokenid}") /conversation/message?token={tokenid}
