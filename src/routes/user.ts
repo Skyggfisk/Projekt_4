@@ -17,6 +17,9 @@ router.get("/", userController.getAll);
 // GET user by facebookid
 router.get("/:id", userController.getOne);
 
+// GET user by category
+router.get("/services/:category", userController.getAllForCategory);
+
 //ALT HEROVER ER FREETOPLAY _____________ ALT UNDER KRÆVER JSONWEBTOKEN
 
 // route middleware to verify a token
