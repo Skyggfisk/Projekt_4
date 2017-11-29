@@ -10,6 +10,8 @@ var ConversationSchema: Schema = new Schema({
   user: [{ type: Schema.Types.ObjectId, ref: User }] // Cannot nest schemas
 });
 
+// some efapjdpawd
+
 export const Conversation: Model<IConversationModel> = model<
   IConversationModel
 >("Conversation", ConversationSchema);
