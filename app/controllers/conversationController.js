@@ -20,7 +20,8 @@ class ConversationController {
     }
     createConversation(req, res, next) {
         var conversation = new conversation_1.Conversation({
-            messages: req.body.messages
+            messages: req.body.messages,
+            user: req.body.user
         });
         conversation.save((err, conversation) => {
             if (err)

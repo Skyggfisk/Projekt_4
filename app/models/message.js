@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const user_1 = require("../models/user");
 var MessageSchema = new mongoose_1.Schema({
-    user: user_1.User,
+    user: [{ type: mongoose_1.Schema.Types.ObjectId, ref: user_1.User }],
     message: String,
     timeStamp: Date,
     conversationID: String

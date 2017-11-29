@@ -5,7 +5,7 @@ import { IMessage } from "../interfaces/message";
 export interface IMessageModel extends IMessage, Document {}
 
 var MessageSchema: Schema = new Schema({
-  user: User,
+  user: [{ type: Schema.Types.ObjectId, ref: User }],
 
   message: String,
   timeStamp: Date,
