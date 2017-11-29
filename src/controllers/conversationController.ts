@@ -26,7 +26,7 @@ export class ConversationController {
     );
   }
 
-  // GET conversation by _id
+  // GET conversation by User id
   getUserConversation(req: Request, res: Response, next: NextFunction) {
     Conversation.findOne(
       { facebookid: req.params.facebookid },

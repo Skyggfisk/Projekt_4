@@ -33,6 +33,7 @@ router.use(function (req, res, next) {
 });
 router.get("/", conversationController.getAll);
 router.get("/:id", conversationController.getOneConversation);
+router.get("/user/:id", conversationController.getUserConversation);
 router.post("/", conversationController.createConversation);
 router.post("/message", conversationController.createMessage);
 exports.default = router;

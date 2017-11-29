@@ -50,6 +50,9 @@ router.get("/", conversationController.getAll);
 // GET conversation by mongo _id
 router.get("/:id", conversationController.getOneConversation);
 
+// GET conversation by user id
+router.get("/user/:id", conversationController.getUserConversation);
+
 // POST a new conversation
 router.post("/", conversationController.createConversation);
 
