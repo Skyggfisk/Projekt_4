@@ -7,7 +7,7 @@ export interface IConversationModel extends IConversation, Document {}
 
 var ConversationSchema: Schema = new Schema({
   messages: Array,
-  user: [{ type: Schema.Types.ObjectId, ref: User }]
+  user: Array
 });
 
 export const Conversation: Model<IConversationModel> = model<

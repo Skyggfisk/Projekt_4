@@ -19,10 +19,10 @@ class ConversationController {
         });
     }
     getUserConversation(req, res, next) {
-        conversation_1.Conversation.findOne({ facebookid: req.params.facebookid }, (err, conversation) => {
+        conversation_1.Conversation.find({ facebookid: req.params.facebookid }, (err, conversations) => {
             if (err)
                 return console.error(err.stack);
-            res.json(conversation);
+            res.json(conversations);
         });
     }
     createConversation(req, res, next) {
@@ -49,7 +49,7 @@ class ConversationController {
         });
         message.save((err, message) => {
             if (err)
-                return console.error(err.stack);
+                return console.error(err.message);
             console.log(moment().format("h:mm:ss a") +
                 " - message: " +
                 message.conversationID +

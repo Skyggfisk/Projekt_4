@@ -3,7 +3,7 @@ import { Document, Schema, Model, model } from "mongoose";
 
 export interface IMessage {
   message: String;
-  user: IUser;
+  user: String;
   timeStamp: Date;
   conversationID: String;
 }

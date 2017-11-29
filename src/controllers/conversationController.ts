@@ -26,13 +26,13 @@ export class ConversationController {
     );
   }
 
-  // GET conversation by User id
+  // GET all conversations for user by facebookid
   getUserConversation(req: Request, res: Response, next: NextFunction) {
-    Conversation.findOne(
+    Conversation.find(
       { facebookid: req.params.facebookid },
-      (err: Error, conversation: IConversationModel) => {
+      (err: Error, conversations: IConversationModel[]) => {
         if (err) return console.error(err.stack);
-        res.json(conversation);
+        res.json(conversations);
       }
     );
   }
@@ -64,7 +64,7 @@ export class ConversationController {
       conversationID: req.body.conversationID
     });
     message.save((err: Error, message: IMessageModel) => {
-      if (err) return console.error(err.stack);
+      if (err) return console.error(err.message);
       console.log(
         moment().format("h:mm:ss a") +
           " - message: " +
