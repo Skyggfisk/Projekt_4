@@ -51,7 +51,7 @@ export class UserController {
       fname: req.body.fname,
       lname: req.body.lname,
       imgurl: req.body.imgurl,
-      conversations: req.body.imgurl
+      conversations: req.body.conversations
     });
     user.save((err: Error, user: IUserModel) => {
       if (err) return console.error(err.stack);

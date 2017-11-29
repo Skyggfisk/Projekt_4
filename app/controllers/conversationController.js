@@ -19,7 +19,7 @@ class ConversationController {
         });
     }
     getUserConversation(req, res, next) {
-        conversation_1.Conversation.findOne({ facebookid: req.params.facebookid }, (err, conversation) => {
+        conversation_1.Conversation.find({ facebookid: req.params.facebookid }, (err, conversation) => {
             if (err)
                 return console.error(err.stack);
             res.json(conversation);

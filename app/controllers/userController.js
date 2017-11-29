@@ -36,7 +36,7 @@ class UserController {
             fname: req.body.fname,
             lname: req.body.lname,
             imgurl: req.body.imgurl,
-            conversations: req.body.imgurl
+            conversations: req.body.conversations
         });
         user.save((err, user) => {
             if (err)
