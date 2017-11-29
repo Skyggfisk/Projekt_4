@@ -11,15 +11,6 @@ export let Schema = mongoose.Schema;
 const userController = new UserController();
 const router = express.Router();
 
-// GET all users
-router.get("/", userController.getAll);
-
-// GET user by facebookid
-router.get("/:id", userController.getOne);
-
-// GET user by category
-router.get("/services/:category", userController.getAllForCategory);
-
 //ALT HEROVER ER FREETOPLAY _____________ ALT UNDER KRÆVER JSONWEBTOKEN
 
 // route middleware to verify a token
@@ -52,6 +43,15 @@ router.use(function(req, res, next) {
     });
   }
 });
+
+// GET all users
+router.get("/", userController.getAll);
+
+// GET user by facebookid
+router.get("/:id", userController.getOne);
+
+// GET user by category
+router.get("/services/:category", userController.getAllForCategory);
 
 // POST a new user
 router.post("/", userController.createUser);

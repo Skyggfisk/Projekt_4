@@ -11,12 +11,6 @@ export let Schema = mongoose.Schema;
 const router = express.Router();
 const taskController = new TaskController();
 
-// GET all tasks
-router.get("/", taskController.getAll);
-
-// GET task by taskID
-router.get("/:id", taskController.getOne);
-
 //ALT HEROVER ER FREETOPLAY _____________ ALT UNDER KRÆVER JSONWEBTOKEN
 
 // route middleware to verify a token
@@ -49,6 +43,12 @@ router.use(function(req, res, next) {
     });
   }
 });
+
+// GET all tasks
+router.get("/", taskController.getAll);
+
+// GET task by taskID
+router.get("/:id", taskController.getOne);
 
 // POST a new task
 router.post("/", taskController.createTask);

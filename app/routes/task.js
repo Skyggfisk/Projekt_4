@@ -8,8 +8,6 @@ const taskController_1 = require("../controllers/taskController");
 exports.Schema = mongoose.Schema;
 const router = express.Router();
 const taskController = new taskController_1.TaskController();
-router.get("/", taskController.getAll);
-router.get("/:id", taskController.getOne);
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers["x-access-token"];
     if (token) {
@@ -33,6 +31,8 @@ router.use(function (req, res, next) {
         });
     }
 });
+router.get("/", taskController.getAll);
+router.get("/:id", taskController.getOne);
 router.post("/", taskController.createTask);
 router.put("/:id", taskController.updateTask);
 router.delete("/:id", taskController.deleteTask);

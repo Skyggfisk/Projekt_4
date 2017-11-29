@@ -26,6 +26,17 @@ export class ConversationController {
     );
   }
 
+  // GET conversation by _id
+  getUserConversation(req: Request, res: Response, next: NextFunction) {
+    Conversation.findOne(
+      { facebookid: req.params.facebookid },
+      (err: Error, conversation: IConversationModel) => {
+        if (err) return console.error(err.stack);
+        res.json(conversation);
+      }
+    );
+  }
+
   // POST a new conversation
   createConversation(req: Request, res: Response, next: NextFunction) {
     var conversation = new Conversation({
