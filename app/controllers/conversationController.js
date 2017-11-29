@@ -19,15 +19,21 @@ class ConversationController {
         });
     }
     getUserConversation(req, res, next) {
-        conversation_1.Conversation.find({ facebookid: req.params.facebookid }, (err, conversation) => {
+        conversation_1.Conversation.find({ user: req.params.facebookid }, (err, conversations) => {
             if (err)
                 return console.error(err.stack);
             res.json(conversations);
         });
     }
+    getMessagesForConversation(req, res, next) {
+        message_1.Message.find({ conversationID: req.params.conversationID }, (err, messages) => {
+            if (err)
+                return console.error(err.message);
+            res.json(messages);
+        });
+    }
     createConversation(req, res, next) {
         var conversation = new conversation_1.Conversation({
-            messages: req.body.messages,
             user: req.body.user
         });
         conversation.save((err, conversation) => {

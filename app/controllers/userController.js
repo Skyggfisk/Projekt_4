@@ -35,8 +35,7 @@ class UserController {
             zipcode: req.body.zipcode,
             fname: req.body.fname,
             lname: req.body.lname,
-            imgurl: req.body.imgurl,
-            conversations: req.body.conversations
+            imgurl: req.body.imgurl
         });
         user.save((err, user) => {
             if (err)
@@ -54,7 +53,6 @@ class UserController {
             user.fname = req.body.fname || user.fname;
             user.lname = req.body.lname || user.lname;
             user.imgurl = req.body.imgurl || user.imgurl;
-            user.conversations = req.body.conversation || user.conversations;
             return user.save(function (err) {
                 if (err)
                     return console.log(err);

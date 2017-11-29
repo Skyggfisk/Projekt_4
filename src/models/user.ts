@@ -11,8 +11,7 @@ var UserSchema: Schema = new Schema({
   zipcode: String,
   fname: String,
   lname: String,
-  imgurl: String,
-  conversations: Array
+  imgurl: String
 });
 
 export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);

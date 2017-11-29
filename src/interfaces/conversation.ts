@@ -4,5 +4,4 @@ import { Document, Schema, Model, model } from "mongoose";
 
 export interface IConversation {
   messages: Array<IMessage>;
-  user: Array<IUser>;
 }

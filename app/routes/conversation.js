@@ -33,8 +33,9 @@ router.use(function (req, res, next) {
 });
 router.get("/", conversationController.getAll);
 router.get("/:id", conversationController.getOneConversation);
-router.get("/user/:id", conversationController.getUserConversation);
+router.get("/user/:facebookid", conversationController.getUserConversation);
 router.post("/", conversationController.createConversation);
 router.post("/message", conversationController.createMessage);
+router.get("/message/:conversationID", conversationController.getMessagesForConversation);
 exports.default = router;
 //# sourceMappingURL=conversation.js.map
