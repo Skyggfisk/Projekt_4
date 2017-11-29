@@ -18,6 +18,13 @@ class ConversationController {
             res.json(conversation);
         });
     }
+    getUserConversation(req, res, next) {
+        conversation_1.Conversation.findOne({ facebookid: req.params.facebookid }, (err, conversation) => {
+            if (err)
+                return console.error(err.stack);
+            res.json(conversation);
+        });
+    }
     createConversation(req, res, next) {
         var conversation = new conversation_1.Conversation({
             messages: req.body.messages,

@@ -7,10 +7,8 @@ export interface IConversationModel extends IConversation, Document {}
 
 var ConversationSchema: Schema = new Schema({
   messages: Array,
-  user: [{ type: Schema.Types.ObjectId, ref: User }] // Cannot nest schemas
+  user: [{ type: Schema.Types.ObjectId, ref: User }]
 });
-
-// some efapjdpawd
 
 export const Conversation: Model<IConversationModel> = model<
   IConversationModel
