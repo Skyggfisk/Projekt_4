@@ -44,6 +44,7 @@ export class UserController {
   createUser(req: Request, res: Response, next: NextFunction) {
     var user = new User({
       facebookid: req.body.facebookid,
+      email: req.body.email,
       description: req.body.description,
       services: req.body.services,
       range: req.body.range,
@@ -67,6 +68,7 @@ export class UserController {
       { facebookid: req.params.id },
       (err: Error, user: IUserModel) => {
         user.description = req.body.description || user.description;
+        user.email = req.body.email || user.email;
         user.services = req.body.services || user.services;
         user.range = req.body.range || user.range;
         user.zipcode = req.body.zipcode || user.zipcode;

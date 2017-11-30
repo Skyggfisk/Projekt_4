@@ -3,6 +3,7 @@ import { IConversation } from "./conversation";
 
 export interface IUser {
   facebookid: string;
+  email: string;
   description: string;
   services: Array<ICategorynprice>;
   range: number;
