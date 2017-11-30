@@ -42,7 +42,7 @@ export class ConversationController {
     Message.find(
       { conversationID: req.params.conversationID },
       (err: Error, messages: IMessageModel[]) => {
-        if (err) return console.error(err.message);
+        if (err) return console.error(err.stack);
         res.json(messages);
       }
     );

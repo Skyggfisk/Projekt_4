@@ -28,7 +28,7 @@ class ConversationController {
     getMessagesForConversation(req, res, next) {
         message_1.Message.find({ conversationID: req.params.conversationID }, (err, messages) => {
             if (err)
-                return console.error(err.message);
+                return console.error(err.stack);
             res.json(messages);
         });
     }
