@@ -9,8 +9,7 @@ var UserSchema = new mongoose_1.Schema({
     zipcode: String,
     fname: String,
     lname: String,
-    imgurl: String,
-    conversations: Array
+    imgurl: String
 });
 exports.User = mongoose_1.model("User", UserSchema);
 exports.default = exports.User;

@@ -1,6 +1,6 @@
 "use strict";
 
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, Errback } from "express";
 import { Conversation, IConversationModel } from "../models/conversation";
 import { Message, IMessageModel } from "../models/message";
 import { Error } from "mongoose";
@@ -29,7 +29,7 @@ export class ConversationController {
   // GET all conversations for user by facebookid
   getUserConversation(req: Request, res: Response, next: NextFunction) {
     Conversation.find(
-      { facebookid: req.params.facebookid },
+      { user: req.params.facebookid },
       (err: Error, conversations: IConversationModel[]) => {
         if (err) return console.error(err.stack);
         res.json(conversations);
@@ -37,10 +37,20 @@ export class ConversationController {
     );
   }
 
+  // GET all messages for a conversation by conversationid
+  getMessagesForConversation(req: Request, res: Response, next: NextFunction) {
+    Message.find(
+      { conversationID: req.params.conversationID },
+      (err: Error, messages: IMessageModel[]) => {
+        if (err) return console.error(err.message);
+        res.json(messages);
+      }
+    );
+  }
+
   // POST a new conversation
   createConversation(req: Request, res: Response, next: NextFunction) {
     var conversation = new Conversation({
-      messages: req.body.messages,
       user: req.body.user
     });
     conversation.save((err: Error, conversation: IConversationModel) => {

@@ -51,12 +51,18 @@ router.get("/", conversationController.getAll);
 router.get("/:id", conversationController.getOneConversation);
 
 // GET conversation by user id
-router.get("/user/:id", conversationController.getUserConversation);
+router.get("/user/:facebookid", conversationController.getUserConversation);
 
 // POST a new conversation
 router.post("/", conversationController.createConversation);
 
 // POST a new message
 router.post("/message", conversationController.createMessage);
+
+// GET all messages for a conversation by conversationid
+router.get(
+  "/message/:conversationID",
+  conversationController.getMessagesForConversation
+);
 
 export default router;

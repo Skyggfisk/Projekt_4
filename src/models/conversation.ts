@@ -6,7 +6,6 @@ import { IConversation } from "../interfaces/conversation";
 export interface IConversationModel extends IConversation, Document {}
 
 var ConversationSchema: Schema = new Schema({
-  messages: Array,
   user: Array
 });
 

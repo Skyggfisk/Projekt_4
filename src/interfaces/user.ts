@@ -10,5 +10,4 @@ export interface IUser {
   fname: string;
   lname: string;
   imgurl: string;
-  conversations: Array<IConversation>;
 }
