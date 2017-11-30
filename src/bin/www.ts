@@ -7,7 +7,7 @@ import app from "../app";
 import * as http from "http";
 import * as https from "https";
 import * as fs from "fs";
-/*
+
 // ssl things
 var key = fs.readFileSync("/home/ubuntu/private.key");
 var cert = fs.readFileSync("/home/ubuntu/primary.crt");
@@ -20,7 +20,7 @@ var SSLoptions = {
 };
 
 https.createServer(SSLoptions, app).listen(443);
-*/
+
 /**
  * Get port from environment and store in Express.
  */
