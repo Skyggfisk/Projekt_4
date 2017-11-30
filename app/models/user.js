@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 var UserSchema = new mongoose_1.Schema({
     facebookid: String,
+    email: String,
     description: String,
     services: Array,
     range: Number,

@@ -29,6 +29,7 @@ class UserController {
     createUser(req, res, next) {
         var user = new user_1.User({
             facebookid: req.body.facebookid,
+            email: req.body.email,
             description: req.body.description,
             services: req.body.services,
             range: req.body.range,
@@ -47,6 +48,7 @@ class UserController {
     updateUser(req, res, next) {
         var user = user_1.User.findOne({ facebookid: req.params.id }, (err, user) => {
             user.description = req.body.description || user.description;
+            user.email = req.body.email || user.email;
             user.services = req.body.services || user.services;
             user.range = req.body.range || user.range;
             user.zipcode = req.body.zipcode || user.zipcode;
