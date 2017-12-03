@@ -44,6 +44,7 @@ class ConversationController {
                 conversation._id +
                 " saved!");
             res.send("it worked");
+            res.json(conversation._id);
         });
     }
     createMessage(req, res, next) {
