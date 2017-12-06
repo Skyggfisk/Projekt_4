@@ -61,8 +61,7 @@ export class ConversationController {
           conversation._id +
           " saved!"
       );
-      res.send("it worked");
-      res.json(conversation._id);
+      res.send(conversation._id);
     });
   }
 
