@@ -1,13 +1,13 @@
 "use strict";
 
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { User, IUserModel } from "../models/user";
 import { Error } from "mongoose";
 import * as moment from "moment";
 
 export class UserController {
   // GET all users
-  getAll(req: Request, res: Response, next: NextFunction) {
+  getAll(req: Request, res: Response) {
     User.find((err: Error, users: JSON) => {
       if (err) return console.error(err.stack);
       res.json(users);
@@ -15,7 +15,7 @@ export class UserController {
   }
 
   // GET user by facebookid
-  getOne(req: Request, res: Response, next: NextFunction) {
+  getOne(req: Request, res: Response) {
     User.findOne(
       { facebookid: req.params.id },
       (err: Error, user: IUserModel) => {
@@ -26,13 +26,11 @@ export class UserController {
   }
 
   // GET users by category
-  getAllForCategory(req: Request, res: Response, next: NextFunction) {
+  getAllForCategory(req: Request, res: Response) {
     User.aggregate(
       {
         $match: { services: { $elemMatch: { category: req.params.category } } }
       },
-      //     { $unwind: "$services" },
-      //     { $match: { "services.category": req.params.category } },
       (err: Error, users: IUserModel[]) => {
         if (err) return console.error(err.stack);
         res.json(users);
@@ -41,7 +39,7 @@ export class UserController {
   }
 
   // POST a new user
-  createUser(req: Request, res: Response, next: NextFunction) {
+  createUser(req: Request, res: Response) {
     var user = new User({
       facebookid: req.body.facebookid,
       email: req.body.email,
@@ -63,7 +61,7 @@ export class UserController {
   }
 
   // UPDATE user by id
-  updateUser(req: Request, res: Response, next: NextFunction) {
+  updateUser(req: Request, res: Response) {
     var user = User.findOne(
       { facebookid: req.params.id },
       (err: Error, user: IUserModel) => {
@@ -75,19 +73,19 @@ export class UserController {
         user.fname = req.body.fname || user.fname;
         user.lname = req.body.lname || user.lname;
         user.imgurl = req.body.imgurl || user.imgurl;
-        return user.save(function(err) {
+        return user.save(function (err) {
           if (err) return console.log(err);
           console.log(
             moment().format("h:mm:ss a") +
-              " - User: " +
-              user.facebookid +
-              " updated!"
+            " - User: " +
+            user.facebookid +
+            " updated!"
           );
           res.send(
             moment().format("h:mm:ss a") +
-              " - User: " +
-              user.facebookid +
-              " updated!"
+            " - User: " +
+            user.facebookid +
+            " updated!"
           );
         });
       }
@@ -95,7 +93,7 @@ export class UserController {
   }
 
   // DELETE user by id
-  deleteUser(req: Request, res: Response, next: NextFunction) {
+  deleteUser(req: Request, res: Response) {
     User.findOneAndRemove(
       { facebookid: req.params.id },
       (err: Error, user: IUserModel) => {

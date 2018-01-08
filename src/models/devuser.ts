@@ -1,9 +1,9 @@
 import { Document, Schema, Model, model } from "mongoose";
 import { IDevUser } from "../interfaces/devuser";
 
-export interface IDevUserModel extends IDevUser, Document {}
+export interface IDevUserModel extends IDevUser, Document { }
 
-export var DevUserSchema: Schema = new Schema({
+var DevUserSchema: Schema = new Schema({
   name: String,
   password: String,
   admin: Boolean

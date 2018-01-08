@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-exports.TaskSchema = new mongoose_1.Schema({
+var TaskSchema = new mongoose_1.Schema({
     title: String,
     creationDate: Date,
     date: Date,
@@ -10,6 +10,6 @@ exports.TaskSchema = new mongoose_1.Schema({
     taskID: String,
     salary: Number
 });
-exports.Task = mongoose_1.model("Task", exports.TaskSchema);
+exports.Task = mongoose_1.model("Task", TaskSchema);
 exports.default = exports.Task;
 //# sourceMappingURL=task.js.map

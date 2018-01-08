@@ -2,19 +2,15 @@
 
 import * as express from "express";
 import * as mongoose from "mongoose";
-import * as moment from "moment";
 import * as jwt from "jsonwebtoken";
 import app from "../app";
+import { Request, Response, NextFunction } from "express";
 import { UserController } from "../controllers/userController";
-import User from "../models/user";
-export let Schema = mongoose.Schema;
-const userController = new UserController();
 const router = express.Router();
-
-//ALT HEROVER ER FREETOPLAY _____________ ALT UNDER KRÆVER JSONWEBTOKEN
+const userController = new UserController();
 
 // route middleware to verify a token
-router.use(function(req, res, next) {
+router.use(function (req: Request, res: Response, next: NextFunction) {
   // check header or url parameters or post parameters for token
   var token =
     req.body.token || req.query.token || req.headers["x-access-token"];
@@ -22,7 +18,7 @@ router.use(function(req, res, next) {
   // decode token
   if (token) {
     // verifies secret and checks exp
-    jwt.verify(token, app.get("superSecret"), function(err, decoded) {
+    jwt.verify(token, app.get("superSecret"), function (err, decoded) {
       if (err) {
         return res.json({
           success: false,

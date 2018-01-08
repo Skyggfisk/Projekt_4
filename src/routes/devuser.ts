@@ -1,18 +1,21 @@
+"use strict";
+
 import * as express from "express";
 import * as mongoose from "mongoose";
-import * as moment from "moment";
 import * as jwt from "jsonwebtoken";
-import DevUser from "../models/devuser";
-export let Schema = mongoose.Schema;
-import config from "../config";
 import app from "../app";
+import { Request, Response } from "express";
+import { Error } from "mongoose";
+import { DevUser } from "../models/devuser";
+import { config } from "../config";
+import { IDevUserModel } from "../models/devuser";
 
 var router = express.Router();
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
-router.post("/authenticate", function(req, res) {
+router.post("/authenticate", function (req: Request, res: Response) {
   // find the user
-  DevUser.findOne({ name: req.body.name }, function(err, devuser) {
+  DevUser.findOne({ name: req.body.name }, function (err: Error, devuser: IDevUserModel) {
     if (err) throw err;
 
     if (!devuser) {

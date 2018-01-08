@@ -1,14 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const devuser_1 = require("../models/devuser");
-exports.Schema = mongoose.Schema;
 const app_1 = require("../app");
+const devuser_1 = require("../models/devuser");
 var router = express.Router();
 router.post("/authenticate", function (req, res) {
-    devuser_1.default.findOne({ name: req.body.name }, function (err, devuser) {
+    devuser_1.DevUser.findOne({ name: req.body.name }, function (err, devuser) {
         if (err)
             throw err;
         if (!devuser) {

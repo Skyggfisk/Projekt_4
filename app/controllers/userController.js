@@ -3,21 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("../models/user");
 const moment = require("moment");
 class UserController {
-    getAll(req, res, next) {
+    getAll(req, res) {
         user_1.User.find((err, users) => {
             if (err)
                 return console.error(err.stack);
             res.json(users);
         });
     }
-    getOne(req, res, next) {
+    getOne(req, res) {
         user_1.User.findOne({ facebookid: req.params.id }, (err, user) => {
             if (err)
                 return console.error(err.stack);
             res.json(user);
         });
     }
-    getAllForCategory(req, res, next) {
+    getAllForCategory(req, res) {
         user_1.User.aggregate({
             $match: { services: { $elemMatch: { category: req.params.category } } }
         }, (err, users) => {
@@ -26,7 +26,7 @@ class UserController {
             res.json(users);
         });
     }
-    createUser(req, res, next) {
+    createUser(req, res) {
         var user = new user_1.User({
             facebookid: req.body.facebookid,
             email: req.body.email,
@@ -45,7 +45,7 @@ class UserController {
             res.send("it worked");
         });
     }
-    updateUser(req, res, next) {
+    updateUser(req, res) {
         var user = user_1.User.findOne({ facebookid: req.params.id }, (err, user) => {
             user.description = req.body.description || user.description;
             user.email = req.body.email || user.email;
@@ -69,7 +69,7 @@ class UserController {
             });
         });
     }
-    deleteUser(req, res, next) {
+    deleteUser(req, res) {
         user_1.User.findOneAndRemove({ facebookid: req.params.id }, (err, user) => {
             if (err)
                 return console.error(err.stack);

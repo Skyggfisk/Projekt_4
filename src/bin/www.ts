@@ -9,17 +9,17 @@ import * as https from "https";
 import * as fs from "fs";
 
 // ssl things
-var key = fs.readFileSync("/home/ubuntu/private.key");
-var cert = fs.readFileSync("/home/ubuntu/primary.crt");
-var ca = fs.readFileSync("/home/ubuntu/server.crt");
+// var key = fs.readFileSync("/home/ubuntu/private.key");
+// var cert = fs.readFileSync("/home/ubuntu/primary.crt");
+// var ca = fs.readFileSync("/home/ubuntu/server.crt");
 
-var SSLoptions = {
-  key: key,
-  cert: cert,
-  ca: ca
-};
+// var SSLoptions = {
+//   key: key,
+//   cert: cert,
+//   ca: ca
+// };
 
-https.createServer(SSLoptions, app).listen(443);
+// https.createServer(SSLoptions, app).listen(443);
 
 /**
  * Get port from environment and store in Express.
@@ -40,7 +40,7 @@ var server = http.createServer(app);
 
 server.listen(port, onListening);
 server.on("error", onError);
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   if (req.secure) {
     next();
   } else {

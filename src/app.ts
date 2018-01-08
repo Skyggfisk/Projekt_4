@@ -65,7 +65,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 //production error handler
-// no stacktrace leaked to user
+//no stacktrace leaked to user
 app.use((err: Error, req, res, next) => {
   res.status(err["status"] || 500);
   res.render("error", {

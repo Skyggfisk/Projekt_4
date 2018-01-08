@@ -1,9 +1,9 @@
 import { Document, Schema, Model, model } from "mongoose";
 import { ITask } from "../interfaces/task";
 
-export interface ITaskModel extends ITask, Document {}
+export interface ITaskModel extends ITask, Document { }
 
-export var TaskSchema: Schema = new Schema({
+var TaskSchema: Schema = new Schema({
   title: String,
   creationDate: Date,
   date: Date,

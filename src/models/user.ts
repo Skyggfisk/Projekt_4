@@ -1,7 +1,7 @@
 import { Document, Schema, Model, model } from "mongoose";
 import { IUser } from "../interfaces/user";
 
-export interface IUserModel extends IUser, Document {}
+export interface IUserModel extends IUser, Document { }
 
 var UserSchema: Schema = new Schema({
   facebookid: String,

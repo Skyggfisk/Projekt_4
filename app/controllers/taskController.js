@@ -3,21 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const task_1 = require("../models/task");
 const moment = require("moment");
 class TaskController {
-    getAll(req, res, next) {
+    getAll(req, res) {
         task_1.Task.find((err, tasks) => {
             if (err)
                 return console.error(err.stack);
             res.json(tasks);
         });
     }
-    getOne(req, res, next) {
+    getOne(req, res) {
         task_1.Task.findOne({ taskID: req.params.id }, (err, task) => {
             if (err)
                 return console.error(err.stack);
             res.json(task);
         });
     }
-    createTask(req, res, next) {
+    createTask(req, res) {
         var task = new task_1.Task({
             title: req.body.title,
             creationDate: req.body.creationDate,
@@ -34,7 +34,7 @@ class TaskController {
             res.send("it worked");
         });
     }
-    updateTask(req, res, next) {
+    updateTask(req, res) {
         var task = task_1.Task.findOne({ taskID: req.params.id }, (err, task) => {
             task.title = req.body.title || task.title;
             task.creationDate = req.body.creationDate || task.creationDate;
@@ -56,7 +56,7 @@ class TaskController {
             });
         });
     }
-    deleteTask(req, res, next) {
+    deleteTask(req, res) {
         task_1.Task.findOneAndRemove({ taskID: req.params.id }, (err, task) => {
             if (err)
                 return console.error(err.stack);

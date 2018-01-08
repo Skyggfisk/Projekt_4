@@ -1,13 +1,13 @@
 "use strict";
 
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { Task, ITaskModel } from "../models/task";
 import { Error } from "mongoose";
 import * as moment from "moment";
 
 export class TaskController {
   // GET all tasks
-  getAll(req: Request, res: Response, next: NextFunction) {
+  getAll(req: Request, res: Response) {
     Task.find((err: Error, tasks: JSON) => {
       if (err) return console.error(err.stack);
       res.json(tasks);
@@ -15,14 +15,14 @@ export class TaskController {
   }
 
   // GET task by id
-  getOne(req: Request, res: Response, next: NextFunction) {
+  getOne(req: Request, res: Response) {
     Task.findOne({ taskID: req.params.id }, (err: Error, task: JSON) => {
       if (err) return console.error(err.stack);
       res.json(task);
     });
   }
   // POST a new task
-  createTask(req: Request, res: Response, next: NextFunction) {
+  createTask(req: Request, res: Response) {
     var task = new Task({
       title: req.body.title,
       creationDate: req.body.creationDate,
@@ -42,7 +42,7 @@ export class TaskController {
   }
 
   // PUT task by id
-  updateTask(req: Request, res: Response, next: NextFunction) {
+  updateTask(req: Request, res: Response) {
     var task = Task.findOne(
       { taskID: req.params.id },
       (err: Error, task: ITaskModel) => {
@@ -56,15 +56,15 @@ export class TaskController {
           if (err) return console.log(err.stack);
           console.log(
             moment().format("h:mm:ss a") +
-              " - Task: " +
-              task.taskID +
-              " updated!"
+            " - Task: " +
+            task.taskID +
+            " updated!"
           );
           res.send(
             moment().format("h:mm:ss a") +
-              " - Task: " +
-              task.taskID +
-              " updated!"
+            " - Task: " +
+            task.taskID +
+            " updated!"
           );
         });
       }
@@ -72,7 +72,7 @@ export class TaskController {
   }
 
   // DELETE task by id
-  deleteTask(req: Request, res: Response, next: NextFunction) {
+  deleteTask(req: Request, res: Response) {
     Task.findOneAndRemove(
       { taskID: req.params.id },
       (err: Error, task: ITaskModel) => {

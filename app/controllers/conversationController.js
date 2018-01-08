@@ -4,35 +4,35 @@ const conversation_1 = require("../models/conversation");
 const message_1 = require("../models/message");
 const moment = require("moment");
 class ConversationController {
-    getAll(req, res, next) {
+    getAll(req, res) {
         conversation_1.Conversation.find((err, conversations) => {
             if (err)
                 return console.error(err.stack);
             res.json(conversations);
         });
     }
-    getOneConversation(req, res, next) {
+    getOneConversation(req, res) {
         conversation_1.Conversation.findOne({ _id: req.params.id }, (err, conversation) => {
             if (err)
                 return console.error(err.stack);
             res.json(conversation);
         });
     }
-    getUserConversation(req, res, next) {
+    getUserConversation(req, res) {
         conversation_1.Conversation.find({ user: req.params.facebookid }, (err, conversations) => {
             if (err)
                 return console.error(err.stack);
             res.json(conversations);
         });
     }
-    getMessagesForConversation(req, res, next) {
+    getMessagesForConversation(req, res) {
         message_1.Message.find({ conversationID: req.params.conversationID }, (err, messages) => {
             if (err)
                 return console.error(err.stack);
             res.json(messages);
         });
     }
-    createConversation(req, res, next) {
+    createConversation(req, res) {
         var conversation = new conversation_1.Conversation({
             user: req.body.user
         });
@@ -46,7 +46,7 @@ class ConversationController {
             res.send(conversation._id);
         });
     }
-    createMessage(req, res, next) {
+    createMessage(req, res) {
         var message = new message_1.Message({
             message: req.body.message,
             user: req.body.user,
